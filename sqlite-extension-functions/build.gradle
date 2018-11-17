@@ -45,7 +45,7 @@ dependencies {
 //Add these lines to publish library to bintray
 publish {
 
-    userOrg ="GipSoft"
+    userOrg ="graviton57"
     groupId = 'com.github.graviton57'
     artifactId = 'sqlite-extension-functions'
     publishVersion = '1.0'
