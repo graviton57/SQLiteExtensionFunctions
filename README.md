@@ -3,11 +3,7 @@
 
 ## What?
 
-The purpose of this project is to use the Android NDK to create a custom version of SQLite to be embedded within an application. 
-It contains the latest SQLite version and the Android specific database APIs derived from AOSP packaged as an AAR library distributed on jcenter.
-This library can be further customized by adding additional SQLite extensions functions.
-Using this library you can keep up to date with the latest versions of SQLite and provide a consistent version across OS versions and devices.
-
+The purpose of this project is to use the Android NDK to create SQLite extensions functions  packaged as an AAR library distributed on jcenter.
 
 ### Extensions functions
 
