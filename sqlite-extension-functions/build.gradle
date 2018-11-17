@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        //noinspection OldTargetApi
+        targetSdkVersion 28
+        versionCode 10
+        ndk {
+            abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
+        }
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation "androidx.sqlite:sqlite:$sqliteLibVersion"
+    implementation "io.requery:sqlite-android:$requeryLibVersion"
+
+}
+
+//Add these lines to publish library to bintray
+publish {
+
+    userOrg ="GipSoft"
+    groupId = 'com.github.graviton57'
+    artifactId = 'sqlite-extension-functions'
+    publishVersion = '1.0'
+    desc = 'SQLite extension functions for Android.'
+    licences = ['Apache-2.0']
+    website = 'https://github.com/graviton57/SqliteExtensionFunctions'
+}
