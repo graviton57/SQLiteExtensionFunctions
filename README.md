@@ -34,7 +34,7 @@ recent versions of SQLite and so by default do not build.
 Add the line below to the dependencies section in the ```build.gradle``` :
 ```
 dependencies {
-         implementation 'com.github.graviton57:sqlite-extension-functions:1.0'
+         implementation 'com.github.graviton57:sqlite-extension-functions:1.1'
 }
 ```
 
