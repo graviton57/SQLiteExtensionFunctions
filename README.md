@@ -40,14 +40,32 @@ dependencies {
 
 Follow the steps below for how to use a extension in your project:
 
-    1. Extend your SQLiteOpenHelper and override createConfiguration method:
+    Extend your SQLiteOpenHelper and override createConfiguration method:
         
     @Override
         protected SQLiteDatabaseConfiguration createConfiguration( final String path, final int openFlags ) {
             final SQLiteDatabaseConfiguration config = super.createConfiguration( path, openFlags );
             config.customExtensions.add( new SQLiteExtensionFunctions().getExtension( context.getApplicationInfo()) );
             return config;
-        }    
+        }
+        
+    or extend your RoomDatabase  :
+    
+    public static synchronized SalaryDatabase getInstance( final Context context ) {
+            
+            final SQLiteCustomExtension extension = 
+                    new SQLiteExtensionFunctions().getExtension( context.getApplicationInfo());
+            final Iterable<RequerySQLiteOpenHelperFactory.ConfigurationOptions> configurationOptions =
+                    new ExtensionSQLiteOpenHelperFactory().getExtensionConfigOptions( extension );
+            
+            if (sInstance == null) {
+                sInstance = Room
+                        .databaseBuilder(context.getApplicationContext(), SalaryDatabase.class, "salaries.db")
+                        .openHelperFactory( new RequerySQLiteOpenHelperFactory( configurationOptions ) )
+                        .build();
+            }
+            return sInstance;
+        }       
     
 CPU Architectures
 -----------------
